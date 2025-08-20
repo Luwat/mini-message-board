@@ -4,12 +4,12 @@
     <title>
         <%= title %>
     </title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
     <h1>Welcome to mini message board app</h1>
-    <!-- <% if (messages && messages.length> 0) { %> -->
+    <% if (messages && messages.length> 0) { %>
     <% messages.forEach(message=> {%>
         <div>
             <h2>
@@ -20,12 +20,12 @@
             </p>
             <p>Message was added on <%= message.created_at.toLocaleString() %>
             </p>
-            <a href="/message/<%= message.id %>">Open</a>
+            <a href="/message/<%= message.id %>">view message</a>
         </div>
         <% }) %>
-            <!-- <% } else { %>
+            <% } else { %>
                     <p>No messages found</p>
-                    <% } %> -->
+                    <% } %>
             <a href="/new">Add a new message</a>
 </body>
 

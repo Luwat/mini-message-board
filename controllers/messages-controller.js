@@ -7,17 +7,17 @@ async function getAllMessages(req, res) {
 
 async function getMessageById(req, res) {
   const { messageId } = req.params;
-  console.log(messageId);
   const message = (await db.getMessageById(messageId)).rows.find(
-    (message) => message.id == messageId
+    (message) => message.id === Number(messageId)
   );
+  if (isNaN(messageId)) {
+    res.status(404).send("User not found");
+  }
   if (message) {
     res.render("messageDetails", {
       title: `Messages from ${message.username}`,
       message: message,
     });
-  } else {
-    res.status(404).send("User not found");
   }
 }
 
