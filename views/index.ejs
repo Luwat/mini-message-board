@@ -4,24 +4,28 @@
     <title>
         <%= title %>
     </title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <h1>Welcome to mini message board app</h1>
+    <!-- <% if (messages && messages.length> 0) { %> -->
     <% messages.forEach(message=> {%>
         <div>
             <h2>
-                <%= message.user %>
+                <%= message.username %>
             </h2>
             <p>
                 <%= message.text %>
             </p>
-            <p>Message was added on <%= message.added%>
+            <p>Message was added on <%= message.created_at.toLocaleString() %>
             </p>
-            <a href="/<%= message.user %>">Open</a>
+            <a href="/message/<%= message.id %>">Open</a>
         </div>
         <% }) %>
+            <!-- <% } else { %>
+                    <p>No messages found</p>
+                    <% } %> -->
             <a href="/new">Add a new message</a>
 </body>
 

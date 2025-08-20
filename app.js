@@ -3,7 +3,7 @@ const indexRouter = require('./routes/indexRouter');
 const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 3000;
-const assetsPath = path.join(__dirname, 'assets');
+const assetsPath = path.join(__dirname, 'public');
 app.use(express.urlencoded({ extended: true}))
 app.use(express.static(assetsPath));
 app.use('/', indexRouter);

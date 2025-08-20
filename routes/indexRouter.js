@@ -12,33 +12,14 @@ const messages = [
 ];
 
 const { Router } = require('express');
+const { getAllMessages, createMessageGet, getMessageById, createMessage } = require('../controllers/messages-controller');
 const indexRouter = Router();
 
-indexRouter.get('/', (req, res) => res.render('index', { title: "Mini Message Board", messages}));
+indexRouter.get('/', getAllMessages);
 
-indexRouter.get('/new', (req, res) => {
-    res.render('form', { title: "Add a New Message" });
-});
+indexRouter.get('/new', createMessageGet);
 
-indexRouter.get('/:user', (req, res) => {
-    const user = req.params.user;
-    const userMessages = messages.find(message => message.user === user);
-    if (userMessages) {
-        res.render('messageDetails', { title: `Messages from ${user}`, message: userMessages });
-        console.log(userMessages);
-    } else {
-        res.status(404).send('User not found');
-    }
-})
+indexRouter.get('/message/:messageId', getMessageById)
 
-indexRouter.post('/new', (req, res) => {
-    const { messageUser, messageText } = req.body;
-    const newMessage = {
-        text: messageText,
-        user: messageUser,
-        added: new Date()
-    };
-    messages.push(newMessage);
-    res.redirect('/');
-})
+indexRouter.post('/new', createMessage)
 module.exports = indexRouter;
